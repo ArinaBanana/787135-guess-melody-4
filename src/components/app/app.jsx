@@ -11,6 +11,6 @@ const App = (props) => {
 
 App.propTypes = {
   errorsCount: PropTypes.number.isRequired,
-}
+};
 
 export default App;

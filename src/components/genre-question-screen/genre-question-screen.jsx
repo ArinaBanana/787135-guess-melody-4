@@ -36,9 +36,9 @@ class GenreQuestionScreen extends PureComponent {
           </svg>
 
           <div className="game__mistakes">
-            <div className="wrong"></div>
-            <div className="wrong"></div>
-            <div className="wrong"></div>
+            <div className="wrong" />
+            <div className="wrong" />
+            <div className="wrong" />
           </div>
         </header>
 

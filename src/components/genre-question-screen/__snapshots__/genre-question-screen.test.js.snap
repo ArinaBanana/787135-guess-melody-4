@@ -32,7 +32,13 @@ exports[`Should GenreQuestScreen render correctly 1`] = `
         cx="390"
         cy="390"
         r="370"
-        style="filter: url(#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center"
+        style={
+          Object {
+            "filter": "url(#blur)",
+            "transform": "rotate(-90deg) scaleY(-1)",
+            "transformOrigin": "center",
+          }
+        }
       />
     </svg>
     <div
@@ -55,10 +61,14 @@ exports[`Should GenreQuestScreen render correctly 1`] = `
     <h2
       className="game__title"
     >
-      Выберите инди-рок треки
+      Выберите 
+      rock
+       треки
     </h2>
     <form
+      action="#"
       className="game__tracks"
+      onSubmit={[Function]}
     >
       <div
         className="track"
@@ -70,21 +80,25 @@ exports[`Should GenreQuestScreen render correctly 1`] = `
         <div
           className="track__status"
         >
-          <audio />
+          <audio
+            src="https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg"
+          />
         </div>
         <div
           className="game__answer"
         >
           <input
+            checked={false}
             className="game__input visually-hidden"
-            id="answer-1"
+            id="answer-0"
             name="answer"
+            onChange={[Function]}
             type="checkbox"
-            value="answer-1"
+            value="answer-0"
           />
           <label
             className="game__check"
-            htmlFor="answer-1"
+            htmlFor="answer-2"
           >
             Отметить
           </label>
@@ -100,15 +114,19 @@ exports[`Should GenreQuestScreen render correctly 1`] = `
         <div
           className="track__status"
         >
-          <audio />
+          <audio
+            src="https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg"
+          />
         </div>
         <div
           className="game__answer"
         >
           <input
+            checked={false}
             className="game__input visually-hidden"
-            id="answer-2"
+            id="answer-1"
             name="answer"
+            onChange={[Function]}
             type="checkbox"
             value="answer-1"
           />
@@ -124,27 +142,31 @@ exports[`Should GenreQuestScreen render correctly 1`] = `
         className="track"
       >
         <button
-          className="track__button track__button--pause"
+          className="track__button track__button--play"
           type="button"
         />
         <div
           className="track__status"
         >
-          <audio />
+          <audio
+            src="https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg"
+          />
         </div>
         <div
           className="game__answer"
         >
           <input
+            checked={false}
             className="game__input visually-hidden"
-            id="answer-3"
+            id="answer-2"
             name="answer"
+            onChange={[Function]}
             type="checkbox"
-            value="answer-1"
+            value="answer-2"
           />
           <label
             className="game__check"
-            htmlFor="answer-3"
+            htmlFor="answer-2"
           >
             Отметить
           </label>
@@ -160,32 +182,30 @@ exports[`Should GenreQuestScreen render correctly 1`] = `
         <div
           className="track__status"
         >
-          <audio />
+          <audio
+            src="https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg"
+          />
         </div>
         <div
           className="game__answer"
         >
           <input
+            checked={false}
             className="game__input visually-hidden"
-            id="answer-4"
+            id="answer-3"
             name="answer"
+            onChange={[Function]}
             type="checkbox"
-            value="answer-1"
+            value="answer-3"
           />
           <label
             className="game__check"
-            htmlFor="answer-4"
+            htmlFor="answer-2"
           >
             Отметить
           </label>
         </div>
       </div>
-      <button
-        className="game__submit button"
-        type="submit"
-      >
-        Ответить
-      </button>
     </form>
   </section>
 </section>

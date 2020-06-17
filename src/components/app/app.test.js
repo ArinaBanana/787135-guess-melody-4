@@ -19,7 +19,24 @@ const questions = [
       src: `path`,
       genre: `rock`,
     }],
-  }
+  },
+  {
+    type: `artist`,
+    song: {
+      artist: `Jim Beam`,
+      src: `path`,
+    },
+    answers: [{
+      picture: `path`,
+      artist: `John Snow`,
+    }, {
+      picture: `path`,
+      artist: `Jack Daniels`,
+    }, {
+      picture: `path`,
+      artist: `Jim Beam`,
+    }],
+  },
 ];
 
 it(`Render App`, () => {

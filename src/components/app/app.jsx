@@ -12,7 +12,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {errorsCount} = this.props;
+    const {errorsCount, questions} = this.props;
 
     return (
       <BrowserRouter>
@@ -24,7 +24,7 @@ class App extends PureComponent {
             <ArtistQuestionScreen />
           </Route>
           <Route exact path="/dev-genre">
-            <GenreQuestionScreen />
+            <GenreQuestionScreen question={questions[0]} onAnswer={() => {}} />
           </Route>
         </Switch>
       </BrowserRouter>

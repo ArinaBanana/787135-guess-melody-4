@@ -77,7 +77,7 @@ class ArtistQuestionScreen extends React.Component {
 
 ArtistQuestionScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
-  question: PropTypes.arrayOf(PropTypes.shape({
+  question: PropTypes.shape({
     answers: PropTypes.arrayOf(PropTypes.shape({
       artist: PropTypes.string.isRequired,
       picture: PropTypes.string.isRequired,
@@ -86,8 +86,8 @@ ArtistQuestionScreen.propTypes = {
       artist: PropTypes.string.isRequired,
       src: PropTypes.string.isRequired,
     }).isRequired,
-    type: PropTypes.oneOf(GameType.ARTIST, GameType.GENRE).isRequired
-  }))
+    type: PropTypes.oneOf([GameType.ARTIST, GameType.GENRE]).isRequired
+  })
 };
 
 export default ArtistQuestionScreen;

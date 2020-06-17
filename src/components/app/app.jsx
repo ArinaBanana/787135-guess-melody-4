@@ -7,6 +7,11 @@ import ArtistQuestionScreen from "../artist-question-screen/artist-question-scre
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen.jsx";
 import {GameType} from "../../const";
 
+const SCREENS = {
+  [GameType.ARTIST]: ArtistQuestionScreen,
+  [GameType.GENRE]: GenreQuestionScreen
+};
+
 class App extends PureComponent {
   constructor(props) {
     super(props);
@@ -14,6 +19,9 @@ class App extends PureComponent {
     this.state = {
       step: -1,
     };
+
+    this._incrementStep = this._incrementStep.bind(this);
+    this._resetStep = this._resetStep.bind(this);
   }
 
   render() {
@@ -41,47 +49,40 @@ class App extends PureComponent {
     const {step} = this.state;
     const question = questions[step];
 
-    if (step === -1 || step >= questions.length) {
+    const isDefaultStep = step === -1;
+
+    if (isDefaultStep || step >= questions.length) {
       return (
         <WelcomeScreen
           errorsCount={errorsCount}
-          onWelcomeButtonClick={() => {
-            this.setState({
-              step: 0
-            });
-          }}
+          onWelcomeButtonClick={this._resetStep}
         />
       );
     }
 
     if (question) {
-      switch (question.type) {
-        case GameType.ARTIST:
-          return (
-            <ArtistQuestionScreen
-              question={question}
-              onAnswer={() => {
-                this.setState((prevState) => ({
-                  step: prevState.step + 1,
-                }));
-              }}
-            />
-          );
-        case GameType.GENRE:
-          return (
-            <GenreQuestionScreen
-              question={question}
-              onAnswer={() => {
-                this.setState((prevState) => ({
-                  step: prevState.step + 1,
-                }));
-              }}
-            />
-          );
+      const Component = SCREENS[question.type];
+
+      if (!Component) {
+        return null;
       }
+
+      return <Component question={question} onAnswer={this._incrementStep} />;
     }
 
     return null;
+  }
+
+  _incrementStep() {
+    this.setState((prevState) => ({
+      step: prevState.step + 1,
+    }));
+  }
+
+  _resetStep() {
+    this.setState({
+      step: 0
+    });
   }
 }
 

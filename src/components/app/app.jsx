@@ -21,7 +21,7 @@ class App extends PureComponent {
             <WelcomeScreen errorsCount={errorsCount} onWelcomeButtonClick={() => {}} />
           </Route>
           <Route exact path="/dev-artist">
-            <ArtistQuestionScreen />
+            <ArtistQuestionScreen question={questions[1]} onAnswer={() => {}} />
           </Route>
           <Route exact path="/dev-genre">
             <GenreQuestionScreen question={questions[0]} onAnswer={() => {}} />

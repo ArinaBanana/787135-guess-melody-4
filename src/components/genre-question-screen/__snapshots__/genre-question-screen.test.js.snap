@@ -98,7 +98,7 @@ exports[`Should GenreQuestScreen render correctly 1`] = `
           />
           <label
             className="game__check"
-            htmlFor="answer-2"
+            htmlFor="answer-0"
           >
             Отметить
           </label>
@@ -132,7 +132,7 @@ exports[`Should GenreQuestScreen render correctly 1`] = `
           />
           <label
             className="game__check"
-            htmlFor="answer-2"
+            htmlFor="answer-1"
           >
             Отметить
           </label>
@@ -200,7 +200,7 @@ exports[`Should GenreQuestScreen render correctly 1`] = `
           />
           <label
             className="game__check"
-            htmlFor="answer-2"
+            htmlFor="answer-3"
           >
             Отметить
           </label>

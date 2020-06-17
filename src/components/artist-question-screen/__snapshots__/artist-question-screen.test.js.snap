@@ -76,7 +76,9 @@ exports[`Should ArtistQuestionScree render correctly 1`] = `
         <div
           className="track__status"
         >
-          <audio />
+          <audio
+            src="path"
+          />
         </div>
       </div>
     </div>
@@ -88,21 +90,55 @@ exports[`Should ArtistQuestionScree render correctly 1`] = `
       >
         <input
           className="artist__input visually-hidden"
-          id="answer-1"
-          name="answer"
+          id="answer-0"
+          name={
+            Object {
+              "artist": "John Snow",
+              "picture": "path",
+            }
+          }
+          onChange={[Function]}
           type="radio"
-          value="artist-1"
+          value="answer-0"
+        />
+        <label
+          className="artist__name"
+          htmlFor="answer-0"
+        >
+          <img
+            alt="John Snow"
+            className="artist__picture"
+            src="path"
+          />
+          John Snow
+        </label>
+      </div>
+      <div
+        className="artist"
+      >
+        <input
+          className="artist__input visually-hidden"
+          id="answer-1"
+          name={
+            Object {
+              "artist": "Jack Daniels",
+              "picture": "path",
+            }
+          }
+          onChange={[Function]}
+          type="radio"
+          value="answer-1"
         />
         <label
           className="artist__name"
           htmlFor="answer-1"
         >
           <img
-            alt="Пелагея"
+            alt="Jack Daniels"
             className="artist__picture"
-            src="http://placehold.it/134x134"
+            src="path"
           />
-          Пелагея
+          Jack Daniels
         </label>
       </div>
       <div
@@ -111,42 +147,26 @@ exports[`Should ArtistQuestionScree render correctly 1`] = `
         <input
           className="artist__input visually-hidden"
           id="answer-2"
-          name="answer"
+          name={
+            Object {
+              "artist": "Jim Beam",
+              "picture": "path",
+            }
+          }
+          onChange={[Function]}
           type="radio"
-          value="artist-2"
+          value="answer-2"
         />
         <label
           className="artist__name"
           htmlFor="answer-2"
         >
           <img
-            alt="Пелагея"
+            alt="Jim Beam"
             className="artist__picture"
-            src="http://placehold.it/134x134"
+            src="path"
           />
-          Краснознаменная дивизия имени моей бабушки
-        </label>
-      </div>
-      <div
-        className="artist"
-      >
-        <input
-          className="artist__input visually-hidden"
-          id="answer-3"
-          name="answer"
-          type="radio"
-          value="artist-3"
-        />
-        <label
-          className="artist__name"
-          htmlFor="answer-3"
-        >
-          <img
-            alt="Пелагея"
-            className="artist__picture"
-            src="http://placehold.it/134x134"
-          />
-          Lorde
+          Jim Beam
         </label>
       </div>
     </form>

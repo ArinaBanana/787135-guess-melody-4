@@ -4,15 +4,10 @@ import PropTypes from "prop-types";
 class GenreAnswer extends PureComponent {
   constructor(props) {
     super(props);
-
-    this.state = {
-      answers: [false, false, false, false],
-    };
   }
 
   render() {
-    const {answer, index} = this.props;
-    const {answers: userAnswers} = this.state;
+    const {answer, index, userAnswers, updateAnswers} = this.props;
 
     return (
       <div className="track">
@@ -30,9 +25,9 @@ class GenreAnswer extends PureComponent {
             onChange={(evt) => {
               const value = evt.target.checked;
 
-              this.setState({
-                answers: [...userAnswers.slice(0, index), value, ...userAnswers.slice(index + 1)],
-              });
+              const answers = [...userAnswers.slice(0, index), value, ...userAnswers.slice(index + 1)];
+
+              updateAnswers(answers);
             }}
           />
           <label className="game__check" htmlFor={`answer-${index}`}>Отметить</label>
@@ -43,8 +38,13 @@ class GenreAnswer extends PureComponent {
 }
 
 GenreAnswer.propTypes = {
+  updateAnswers: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
-  answer: PropTypes.object.isRequired,
+  answer: PropTypes.shape({
+    src: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired
+  }).isRequired,
+  userAnswers: PropTypes.arrayOf(PropTypes.bool).isRequired
 };
 
 export default GenreAnswer;

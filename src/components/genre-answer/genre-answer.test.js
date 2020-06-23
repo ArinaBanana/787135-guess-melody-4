@@ -7,8 +7,10 @@ const answer = {
   genre: `rock`
 };
 
+const userAnswers = [true, false, true, false];
+
 it(`Should render `, () => {
-  const tree = renderer.create(<GenreAnswer index={0} answer={answer} />).toJSON();
+  const tree = renderer.create(<GenreAnswer index={0} answer={answer} userAnswers={userAnswers} updateAnswers={() => {}} />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

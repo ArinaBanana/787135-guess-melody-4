@@ -19,7 +19,7 @@ exports[`Should render  1`] = `
     className="game__answer"
   >
     <input
-      checked={false}
+      checked={true}
       className="game__input visually-hidden"
       id="answer-0"
       name="answer"

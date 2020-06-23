@@ -8,19 +8,33 @@ class GenreQuestionScreen extends PureComponent {
   constructor(props) {
     super(props);
 
+    this.state = {
+      answers: [false, false, false, false],
+    };
+
     this._handleSubmitForm = this._handleSubmitForm.bind(this);
+    this._updateAnswers = this._updateAnswers.bind(this);
   }
 
   _handleSubmitForm(evt) {
     evt.preventDefault();
 
     const {onAnswer, question} = this.props;
-    onAnswer(question, this.state.answers);
+    const {answers} = this.state;
+
+    onAnswer(question, answers);
+  }
+
+  _updateAnswers(answers) {
+    this.setState({
+      answers
+    });
   }
 
   render() {
     const {question} = this.props;
     const {answers, genre} = question;
+    const {answers: userAnswers} = this.state;
 
     const styleForTimerLine = {
       "filter": `url(#blur)`,
@@ -59,8 +73,13 @@ class GenreQuestionScreen extends PureComponent {
               answers.map((answer, i) => <GenreAnswer
                 key={`${i}-${answer.src}`}
                 answer={answer}
-                index={i}/>)
+                userAnswers={userAnswers}
+                index={i}
+                updateAnswers={this._updateAnswers}
+              />)
             }
+
+            <button className="game__submit button" type="submit">Ответить</button>
           </form>
         </section>
       </section>

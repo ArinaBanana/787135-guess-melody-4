@@ -7,14 +7,19 @@ import {GameType} from "../../const";
 class GenreQuestionScreen extends PureComponent {
   constructor(props) {
     super(props);
+
+    this._handleSubmitForm = this._handleSubmitForm.bind(this);
   }
 
-  _handleSubmitForm() {
-    
+  _handleSubmitForm(evt) {
+    evt.preventDefault();
+
+    const {onAnswer, question} = this.props;
+    onAnswer(question, this.state.answers);
   }
 
   render() {
-    const {onAnswer, question} = this.props;
+    const {question} = this.props;
     const {answers, genre} = question;
 
     const styleForTimerLine = {
@@ -48,10 +53,7 @@ class GenreQuestionScreen extends PureComponent {
           <form
             action="#"
             className="game__tracks"
-            onSubmit={(evt) => {
-              evt.preventDefault();
-              onAnswer(question, this.state.answers);
-            }}
+            onSubmit={this._handleSubmitForm}
           >
             {
               answers.map((answer, i) => <GenreAnswer

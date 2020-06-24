@@ -37,15 +37,15 @@ it(`Click on user answer should pass to the callback data-object from which this
     picture: `pic-one`
   };
 
-  const screen = shallow(<ArtistQuestionScreen onAnswerDone={onAnswer} question={question} />);
+  const screen = shallow(<ArtistQuestionScreen onAnswerDone={onAnswerDone} question={question} />);
 
   const answerInputs = screen.find(`input`);
   const answerOne = answerInputs.at(0);
 
   answerOne.simulate(`change`, {preventDefault() {}});
 
-  expect(onAnswer).toHaveBeenCalledTimes(1);
+  expect(onAnswerDone).toHaveBeenCalledTimes(1);
 
-  expect(onAnswer.mock.calls[0][0]).toMatchObject(question);
-  expect(onAnswer.mock.calls[0][1]).toMatchObject(userAnswer);
+  expect(onAnswerDone.mock.calls[0][0]).toMatchObject(question);
+  expect(onAnswerDone.mock.calls[0][1]).toMatchObject(userAnswer);
 });

@@ -23,6 +23,6 @@ const questions = [
 ];
 
 it(`Should ArtistQuestionScree render correctly`, () => {
-  const tree = renderer.create(<ArtistQuestionScreen question={questions[0]} onAnswer={() =>{}} />).toJSON();
+  const tree = renderer.create(<ArtistQuestionScreen question={questions[0]} onAnswerDone={() =>{}} />).toJSON();
   expect(tree).toMatchSnapshot();
 });

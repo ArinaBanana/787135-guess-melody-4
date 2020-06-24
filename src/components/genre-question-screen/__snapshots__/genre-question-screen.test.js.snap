@@ -206,6 +206,12 @@ exports[`Should GenreQuestScreen render correctly 1`] = `
           </label>
         </div>
       </div>
+      <button
+        className="game__submit button"
+        type="submit"
+      >
+        Ответить
+      </button>
     </form>
   </section>
 </section>

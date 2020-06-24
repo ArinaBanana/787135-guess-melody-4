@@ -32,9 +32,9 @@ configure({adapter: new Adapter()});
 
 it(`When user answer genre question form not sent`, () => {
   const {question} = mock;
-  const onAnswer = jest.fn();
+  const onAnswerDone = jest.fn();
 
-  const genreQuestion = shallow(<GenreQuestionScreen question={question} onAnswer={onAnswer} />);
+  const genreQuestion = shallow(<GenreQuestionScreen question={question} onAnswerDone={onAnswerDone} />);
 
   const form = genreQuestion.find(`form`);
   const formSendPrevention = jest.fn();
@@ -42,29 +42,17 @@ it(`When user answer genre question form not sent`, () => {
     preventDefault: formSendPrevention
   });
 
-  expect(onAnswer).toHaveBeenCalledTimes(1);
+  expect(onAnswerDone).toHaveBeenCalledTimes(1);
   expect(formSendPrevention).toHaveBeenCalledTimes(1);
 });
 
 it(`User answer passed callback is consistent with "userAnswer" prop`, () => {
   const {question} = mock;
-  const onAnswer = jest.fn((...args) => [...args]);
-  const userAnswer = [false, true, false, false];
+  const onAnswerDone = jest.fn();
+  const genreQuestion = shallow(<GenreQuestionScreen question={question} onAnswerDone={onAnswerDone} />);
 
-  const genreQuestion = shallow(<GenreQuestionScreen question={question} onAnswer={onAnswer} />);
-
-  const form = genreQuestion.find(`form`);
-  const inputTwo = genreQuestion.find(`input`).at(1);
-
-  inputTwo.simulate(`change`, {target: {checked: true}});
-  form.simulate(`submit`, {preventDefault() {}});
-
-  expect(onAnswer).toHaveBeenCalledTimes(1);
-
-  expect(onAnswer.mock.calls[0][0]).toMatchObject(question);
-  expect(onAnswer.mock.calls[0][1]).toMatchObject(userAnswer);
-
-  expect(
-      genreQuestion.find(`input`).map((it) => it.prop(`checked`))
-  ).toEqual(userAnswer);
+  const instance = genreQuestion.instance();
+  expect(instance.state.answers).toMatchObject([false, false, false, false]);
+  instance._updateAnswers(true, 0);
+  expect(instance.state.answers).toMatchObject([true, false, false, false]);
 });

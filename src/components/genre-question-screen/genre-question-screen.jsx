@@ -19,13 +19,16 @@ class GenreQuestionScreen extends PureComponent {
   _handleSubmitForm(evt) {
     evt.preventDefault();
 
-    const {onAnswer, question} = this.props;
+    const {onAnswerDone, question} = this.props;
     const {answers} = this.state;
 
-    onAnswer(question, answers);
+    onAnswerDone(question, answers);
   }
 
-  _updateAnswers(answers) {
+  _updateAnswers(answer, index) {
+    const {answers: userAnswers} = this.state;
+    const answers = [...userAnswers.slice(0, index), answer, ...userAnswers.slice(index + 1)];
+
     this.setState({
       answers
     });
@@ -72,10 +75,10 @@ class GenreQuestionScreen extends PureComponent {
             {
               answers.map((answer, i) => <GenreAnswer
                 key={`${i}-${answer.src}`}
-                answer={answer}
-                userAnswers={userAnswers}
+                audioUrl={answer.src}
+                userAnswer={userAnswers[i]}
                 index={i}
-                updateAnswers={this._updateAnswers}
+                onChangeAnswer={this._updateAnswers}
               />)
             }
 
@@ -88,7 +91,7 @@ class GenreQuestionScreen extends PureComponent {
 }
 
 GenreQuestionScreen.propTypes = {
-  onAnswer: PropTypes.func.isRequired,
+  onAnswerDone: PropTypes.func.isRequired,
   question: PropTypes.shape({
     answers: PropTypes.arrayOf(PropTypes.shape({
       src: PropTypes.string.isRequired,

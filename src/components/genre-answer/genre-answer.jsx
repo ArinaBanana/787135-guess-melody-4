@@ -7,13 +7,13 @@ class GenreAnswer extends PureComponent {
   }
 
   render() {
-    const {answer, index, userAnswers, updateAnswers} = this.props;
+    const {audioUrl, index, userAnswer, onChangeAnswer} = this.props;
 
     return (
       <div className="track">
         <button className="track__button track__button--play" type="button" />
         <div className="track__status">
-          <audio src={answer.src} />
+          <audio src={audioUrl} />
         </div>
         <div className="game__answer">
           <input className="game__input visually-hidden"
@@ -21,13 +21,11 @@ class GenreAnswer extends PureComponent {
             name="answer"
             value={`answer-${index}`}
             id={`answer-${index}`}
-            checked={userAnswers[index]}
+            checked={userAnswer}
             onChange={(evt) => {
               const value = evt.target.checked;
 
-              const answers = [...userAnswers.slice(0, index), value, ...userAnswers.slice(index + 1)];
-
-              updateAnswers(answers);
+              onChangeAnswer(value, index);
             }}
           />
           <label className="game__check" htmlFor={`answer-${index}`}>Отметить</label>
@@ -38,13 +36,10 @@ class GenreAnswer extends PureComponent {
 }
 
 GenreAnswer.propTypes = {
-  updateAnswers: PropTypes.func.isRequired,
+  onChangeAnswer: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
-  answer: PropTypes.shape({
-    src: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired
-  }).isRequired,
-  userAnswers: PropTypes.arrayOf(PropTypes.bool).isRequired
+  userAnswer: PropTypes.bool.isRequired,
+  audioUrl: PropTypes.string.isRequired
 };
 
 export default GenreAnswer;

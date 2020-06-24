@@ -14,7 +14,7 @@ class ArtistQuestionScreen extends React.Component {
   }
 
   render() {
-    const {onAnswer, question} = this.props;
+    const {onAnswerDone, question} = this.props;
     const {answers, song} = question;
 
     return (
@@ -57,7 +57,7 @@ class ArtistQuestionScreen extends React.Component {
                     id={`answer-${i}`}
                     onChange={(evt) => {
                       evt.preventDefault();
-                      onAnswer(question, answer);
+                      onAnswerDone(question, answer);
                     }}
                   />
                   <label className="artist__name" htmlFor={`answer-${i}`}>
@@ -75,7 +75,7 @@ class ArtistQuestionScreen extends React.Component {
 }
 
 ArtistQuestionScreen.propTypes = {
-  onAnswer: PropTypes.func.isRequired,
+  onAnswerDone: PropTypes.func.isRequired,
   question: PropTypes.shape({
     answers: PropTypes.arrayOf(PropTypes.shape({
       artist: PropTypes.string.isRequired,

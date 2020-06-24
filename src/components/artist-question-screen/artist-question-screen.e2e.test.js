@@ -31,13 +31,13 @@ configure({adapter: new Adapter()});
 
 it(`Click on user answer should pass to the callback data-object from which this answer was created`, () => {
   const {question} = mock;
-  const onAnswer = jest.fn();
+  const onAnswerDone = jest.fn();
   const userAnswer = {
     artist: `one`,
     picture: `pic-one`
   };
 
-  const screen = shallow(<ArtistQuestionScreen onAnswer={onAnswer} question={question} />);
+  const screen = shallow(<ArtistQuestionScreen onAnswerDone={onAnswer} question={question} />);
 
   const answerInputs = screen.find(`input`);
   const answerOne = answerInputs.at(0);

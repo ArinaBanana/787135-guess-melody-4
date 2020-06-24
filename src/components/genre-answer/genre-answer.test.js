@@ -10,7 +10,11 @@ const answer = {
 const userAnswers = [true, false, true, false];
 
 it(`Should render `, () => {
-  const tree = renderer.create(<GenreAnswer index={0} answer={answer} userAnswers={userAnswers} updateAnswers={() => {}} />).toJSON();
+  const tree = renderer.create(<GenreAnswer
+    index={0}
+    userAnswer={userAnswers[1]}
+    audioUrl={answer.src}
+    onChangeAnswer={() => {}} />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

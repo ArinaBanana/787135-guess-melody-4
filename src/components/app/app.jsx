@@ -20,8 +20,8 @@ class App extends PureComponent {
       step: -1,
     };
 
-    this._incrementStep = this._incrementStep.bind(this);
-    this._resetStep = this._resetStep.bind(this);
+    this._goNextQuestion = this._goNextQuestion.bind(this);
+    this._startTest = this._startTest.bind(this);
   }
 
   render() {
@@ -34,10 +34,10 @@ class App extends PureComponent {
             {this._renderGameScreen()}
           </Route>
           <Route exact path="/dev-artist">
-            <ArtistQuestionScreen question={questions[1]} onAnswer={() => {}} />
+            <ArtistQuestionScreen question={questions[1]} onAnswerDone={() => {}} />
           </Route>
           <Route exact path="/dev-genre">
-            <GenreQuestionScreen question={questions[0]} onAnswer={() => {}} />
+            <GenreQuestionScreen question={questions[0]} onAnswerDone={() => {}} />
           </Route>
         </Switch>
       </BrowserRouter>
@@ -55,7 +55,7 @@ class App extends PureComponent {
       return (
         <WelcomeScreen
           errorsCount={errorsCount}
-          onWelcomeButtonClick={this._resetStep}
+          onWelcomeButtonClick={this._startTest}
         />
       );
     }
@@ -67,19 +67,26 @@ class App extends PureComponent {
         return null;
       }
 
-      return <Component question={question} onAnswer={this._incrementStep} />;
+      return <Component question={question} onAnswerDone={this._goNextQuestion} />;
     }
 
     return null;
   }
 
-  _incrementStep() {
-    this.setState((prevState) => ({
-      step: prevState.step + 1,
-    }));
+  _goNextQuestion() {
+    const {questions} = this.props;
+    const {step} = this.state;
+
+    const isLastStep = step === questions.length - 1;
+
+    if (!isLastStep) {
+      this.setState((prevState) => ({
+        step: prevState.step + 1,
+      }));
+    }
   }
 
-  _resetStep() {
+  _startTest() {
     this.setState({
       step: 0
     });

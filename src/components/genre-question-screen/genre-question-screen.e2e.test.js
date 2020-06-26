@@ -52,7 +52,7 @@ it(`User answer passed callback is consistent with "userAnswer" prop`, () => {
   const genreQuestion = shallow(<GenreQuestionScreen question={question} onAnswerDone={onAnswerDone} />);
 
   const instance = genreQuestion.instance();
-  expect(instance.state.answers).toMatchObject([false, false, false, false]);
+  expect(instance.state.answers).toEqual([false, false, false, false]);
   instance._updateAnswers(true, 0);
-  expect(instance.state.answers).toMatchObject([true, false, false, false]);
+  expect(instance.state.answers).toEqual([true, false, false, false]);
 });

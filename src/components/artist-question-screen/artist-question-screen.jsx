@@ -18,6 +18,7 @@ class ArtistQuestionScreen extends React.Component {
     };
 
     this._updateAnswer = this._updateAnswer.bind(this);
+    this._isChecked = this._isChecked.bind(this);
   }
 
   _updateAnswer(answer, index) {
@@ -28,6 +29,11 @@ class ArtistQuestionScreen extends React.Component {
     });
 
     onAnswerDone(answer, index);
+  }
+
+  _isChecked(index) {
+    const {currentIndexAnswer} = this.state;
+    return currentIndexAnswer === index;
   }
 
   render() {
@@ -67,8 +73,7 @@ class ArtistQuestionScreen extends React.Component {
           <form className="game__artist">
             {
               answers.map((answer, i) => {
-                const {currentIndexAnswer} = this.state;
-                const isChecked = currentIndexAnswer === i;
+                const isChecked = this._isChecked(i);
 
                 return <ArtistAnswer key={answer.artist} answer={answer} index={i} onChangeAnswer={this._updateAnswer} isChecked={isChecked} />;
               })

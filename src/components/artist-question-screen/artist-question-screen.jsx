@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {GameType} from "../../const";
+import ArtistAnswer from "../artist-answer/artist-answer.jsx";
 
 const styleForTimerLine = {
   "filter": `url(#blur)`,
@@ -11,10 +12,26 @@ const styleForTimerLine = {
 class ArtistQuestionScreen extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      currentIndexAnswer: -1,
+    };
+
+    this._updateAnswer = this._updateAnswer.bind(this);
+  }
+
+  _updateAnswer(answer, index) {
+    const {onAnswerDone} = this.props;
+
+    this.setState({
+      currentIndexAnswer: index
+    });
+
+    onAnswerDone(answer, index);
   }
 
   render() {
-    const {onAnswerDone, question} = this.props;
+    const {question} = this.props;
     const {answers, song} = question;
 
     return (
@@ -49,23 +66,12 @@ class ArtistQuestionScreen extends React.Component {
 
           <form className="game__artist">
             {
-              answers.map((answer, i) => (
-                <div key={answer.artist} className="artist">
-                  <input className="artist__input visually-hidden"
-                    type="radio" name={answer}
-                    value={`answer-${i}`}
-                    id={`answer-${i}`}
-                    onChange={(evt) => {
-                      evt.preventDefault();
-                      onAnswerDone(question, answer);
-                    }}
-                  />
-                  <label className="artist__name" htmlFor={`answer-${i}`}>
-                    <img className="artist__picture" src={answer.picture} alt={answer.artist} />
-                    {answer.artist}
-                  </label>
-                </div>
-              ))
+              answers.map((answer, i) => {
+                const {currentIndexAnswer} = this.state;
+                const isChecked = currentIndexAnswer === i;
+
+                return <ArtistAnswer key={answer.artist} answer={answer} index={i} onChangeAnswer={this._updateAnswer} isChecked={isChecked} />;
+              })
             }
           </form>
         </section>

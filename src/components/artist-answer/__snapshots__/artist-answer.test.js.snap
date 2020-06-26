@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render Artist Answer 1`] = `
+<div
+  className="artist"
+>
+  <input
+    checked={true}
+    className="artist__input visually-hidden"
+    id="answer-1"
+    name={
+      Object {
+        "artist": "John Snow",
+        "picture": "path",
+      }
+    }
+    onChange={[Function]}
+    type="radio"
+    value="answer-1"
+  />
+  <label
+    className="artist__name"
+    htmlFor="answer-1"
+  >
+    <img
+      alt="John Snow"
+      className="artist__picture"
+      src="path"
+    />
+    John Snow
+  </label>
+</div>
+`;

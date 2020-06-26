@@ -89,6 +89,7 @@ exports[`Should ArtistQuestionScree render correctly 1`] = `
         className="artist"
       >
         <input
+          checked={false}
           className="artist__input visually-hidden"
           id="answer-0"
           name={
@@ -117,6 +118,7 @@ exports[`Should ArtistQuestionScree render correctly 1`] = `
         className="artist"
       >
         <input
+          checked={false}
           className="artist__input visually-hidden"
           id="answer-1"
           name={
@@ -145,6 +147,7 @@ exports[`Should ArtistQuestionScree render correctly 1`] = `
         className="artist"
       >
         <input
+          checked={false}
           className="artist__input visually-hidden"
           id="answer-2"
           name={

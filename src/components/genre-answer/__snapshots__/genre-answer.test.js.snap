@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render  1`] = `
+<div
+  className="track"
+>
+  <button
+    className="track__button track__button--play"
+    type="button"
+  />
+  <div
+    className="track__status"
+  >
+    <audio
+      src="path"
+    />
+  </div>
+  <div
+    className="game__answer"
+  >
+    <input
+      checked={false}
+      className="game__input visually-hidden"
+      id="answer-0"
+      name="answer"
+      onChange={[Function]}
+      type="checkbox"
+      value="answer-0"
+    />
+    <label
+      className="game__check"
+      htmlFor="answer-0"
+    >
+      Отметить
+    </label>
+  </div>
+</div>
+`;

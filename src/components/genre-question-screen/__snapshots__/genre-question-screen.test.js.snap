@@ -74,15 +74,15 @@ exports[`Should GenreQuestScreen render correctly 1`] = `
         className="track"
       >
         <button
-          className="track__button track__button--play"
+          className="track__button track__button--pause"
+          disabled={true}
+          onClick={[Function]}
           type="button"
         />
         <div
           className="track__status"
         >
-          <audio
-            src="https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg"
-          />
+          <audio />
         </div>
         <div
           className="game__answer"
@@ -109,14 +109,14 @@ exports[`Should GenreQuestScreen render correctly 1`] = `
       >
         <button
           className="track__button track__button--play"
+          disabled={true}
+          onClick={[Function]}
           type="button"
         />
         <div
           className="track__status"
         >
-          <audio
-            src="https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg"
-          />
+          <audio />
         </div>
         <div
           className="game__answer"
@@ -143,14 +143,14 @@ exports[`Should GenreQuestScreen render correctly 1`] = `
       >
         <button
           className="track__button track__button--play"
+          disabled={true}
+          onClick={[Function]}
           type="button"
         />
         <div
           className="track__status"
         >
-          <audio
-            src="https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg"
-          />
+          <audio />
         </div>
         <div
           className="game__answer"
@@ -177,14 +177,14 @@ exports[`Should GenreQuestScreen render correctly 1`] = `
       >
         <button
           className="track__button track__button--play"
+          disabled={true}
+          onClick={[Function]}
           type="button"
         />
         <div
           className="track__status"
         >
-          <audio
-            src="https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg"
-          />
+          <audio />
         </div>
         <div
           className="game__answer"

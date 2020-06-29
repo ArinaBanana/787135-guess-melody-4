@@ -9,12 +9,16 @@ const answer = {
 
 const userAnswers = [true, false, true, false];
 
-it(`Should render `, () => {
+it(`Should render Genre Answer`, () => {
   const tree = renderer.create(<GenreAnswer
     index={0}
     userAnswer={userAnswers[1]}
     audioUrl={answer.src}
-    onChangeAnswer={() => {}} />).toJSON();
+    onChangeAnswer={() => {}} />, {
+    createNodeMock: () => {
+      return {};
+    }
+  }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

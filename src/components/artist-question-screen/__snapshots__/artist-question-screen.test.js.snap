@@ -70,15 +70,15 @@ exports[`Should ArtistQuestionScree render correctly 1`] = `
         className="track"
       >
         <button
-          className="track__button track__button--play"
+          className="track__button track__button--pause"
+          disabled={true}
+          onClick={[Function]}
           type="button"
         />
         <div
           className="track__status"
         >
-          <audio
-            src="path"
-          />
+          <audio />
         </div>
       </div>
     </div>

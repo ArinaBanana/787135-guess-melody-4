@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import AudioPlayer from "../audio-player/audio-player.jsx";
 
 class GenreAnswer extends PureComponent {
   constructor(props) {
@@ -11,10 +12,7 @@ class GenreAnswer extends PureComponent {
 
     return (
       <div className="track">
-        <button className="track__button track__button--play" type="button" />
-        <div className="track__status">
-          <audio src={audioUrl} />
-        </div>
+        <AudioPlayer isPlaying={index === 0} src={audioUrl}/>
         <div className="game__answer">
           <input className="game__input visually-hidden"
             type="checkbox"

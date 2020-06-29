@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {GameType} from "../../const";
 import ArtistAnswer from "../artist-answer/artist-answer.jsx";
+import AudioPlayer from "../audio-player/audio-player.jsx";
 
 const styleForTimerLine = {
   "filter": `url(#blur)`,
@@ -63,10 +64,7 @@ class ArtistQuestionScreen extends React.Component {
           <h2 className="game__title">Кто исполняет эту песню?</h2>
           <div className="game__track">
             <div className="track">
-              <button className="track__button track__button--play" type="button" />
-              <div className="track__status">
-                <audio src={song.src} />
-              </div>
+              <AudioPlayer src={song.src} isPlaying={true}/>
             </div>
           </div>
 

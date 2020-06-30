@@ -6,9 +6,12 @@ import WelcomeScreen from "../welcome-screen/welcome-screen.jsx";
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen.jsx";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen.jsx";
 import {GameType} from "../../const";
+import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
+
+const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
 
 const SCREENS = {
-  [GameType.ARTIST]: ArtistQuestionScreen,
+  [GameType.ARTIST]: ArtistQuestionScreenWrapped,
   [GameType.GENRE]: GenreQuestionScreen
 };
 
@@ -34,7 +37,7 @@ class App extends PureComponent {
             {this._renderGameScreen()}
           </Route>
           <Route exact path="/dev-artist">
-            <ArtistQuestionScreen question={questions[1]} onAnswerDone={() => {}} />
+            <ArtistQuestionScreenWrapped question={questions[1]} onAnswerDone={() => {}} />
           </Route>
           <Route exact path="/dev-genre">
             <GenreQuestionScreen question={questions[0]} onAnswerDone={() => {}} />

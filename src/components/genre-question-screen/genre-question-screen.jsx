@@ -2,7 +2,10 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
 import GenreAnswer from "../genre-answer/genre-answer.jsx";
+import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
 import {GameType} from "../../const";
+
+const GenreAnswerWrapped = withAudioPlayer(GenreAnswer);
 
 class GenreQuestionScreen extends PureComponent {
   constructor(props) {
@@ -10,18 +13,10 @@ class GenreQuestionScreen extends PureComponent {
 
     this.state = {
       answers: [false, false, false, false],
-      activePlayer: 0
     };
 
     this._handleSubmitForm = this._handleSubmitForm.bind(this);
     this._updateAnswers = this._updateAnswers.bind(this);
-    this._onButtonPlayClick = this._onButtonPlayClick.bind(this);
-  }
-
-  _onButtonPlayClick() {
-    this.setState((prevState) => ({
-      activePlayer: prevState.activePlayer === this._currentIndex ? -1 : this._currentIndex
-    }));
   }
 
   _handleSubmitForm(evt) {
@@ -34,8 +29,6 @@ class GenreQuestionScreen extends PureComponent {
   }
 
   _updateAnswers(answer, index) {
-    this._currentIndex = index;
-
     const {answers: userAnswers} = this.state;
     const answers = [...userAnswers.slice(0, index), answer, ...userAnswers.slice(index + 1)];
 
@@ -47,7 +40,7 @@ class GenreQuestionScreen extends PureComponent {
   render() {
     const {question} = this.props;
     const {answers, genre} = question;
-    const {answers: userAnswers, activePlayer} = this.state;
+    const {answers: userAnswers} = this.state;
 
     const styleForTimerLine = {
       "filter": `url(#blur)`,
@@ -83,14 +76,12 @@ class GenreQuestionScreen extends PureComponent {
             onSubmit={this._handleSubmitForm}
           >
             {
-              answers.map((answer, i) => <GenreAnswer
+              answers.map((answer, i) => <GenreAnswerWrapped
                 key={`${i}-${answer.src}`}
                 audioUrl={answer.src}
                 userAnswer={userAnswers[i]}
                 index={i}
-                activePlayer={activePlayer}
                 onChangeAnswer={this._updateAnswers}
-                onButtonPlayClick={this._onButtonPlayClick}
               />)
             }
 

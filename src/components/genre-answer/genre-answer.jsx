@@ -1,6 +1,5 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import AudioPlayer from "../audio-player/audio-player.jsx";
 
 class GenreAnswer extends PureComponent {
   constructor(props) {
@@ -8,11 +7,11 @@ class GenreAnswer extends PureComponent {
   }
 
   render() {
-    const {audioUrl, index, userAnswer, onChangeAnswer, onButtonPlayClick, activePlayer} = this.props;
+    const {index, userAnswer, onChangeAnswer, renderPlayer, audioUrl} = this.props;
 
     return (
       <div className="track">
-        <AudioPlayer isPlaying={index === activePlayer} src={audioUrl} onButtonPlayClick={onButtonPlayClick}/>
+        {renderPlayer(audioUrl, index)}
         <div className="game__answer">
           <input className="game__input visually-hidden"
             type="checkbox"
@@ -35,11 +34,10 @@ class GenreAnswer extends PureComponent {
 
 GenreAnswer.propTypes = {
   onChangeAnswer: PropTypes.func.isRequired,
-  onButtonPlayClick: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
-  activePlayer: PropTypes.number.isRequired,
   userAnswer: PropTypes.bool.isRequired,
-  audioUrl: PropTypes.string.isRequired
+  audioUrl: PropTypes.string.isRequired,
+  renderPlayer: PropTypes.func.isRequired,
 };
 
 export default GenreAnswer;

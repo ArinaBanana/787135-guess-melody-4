@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import {GameType} from "../../const";
 import ArtistAnswer from "../artist-answer/artist-answer.jsx";
-import AudioPlayer from "../audio-player/audio-player.jsx";
 
 const styleForTimerLine = {
   "filter": `url(#blur)`,
@@ -16,12 +15,10 @@ class ArtistQuestionScreen extends React.Component {
 
     this.state = {
       currentIndexAnswer: -1,
-      isPlaying: true
     };
 
     this._updateAnswer = this._updateAnswer.bind(this);
     this._isChecked = this._isChecked.bind(this);
-    this._onButtonPlayClick = this._onButtonPlayClick.bind(this);
   }
 
   _updateAnswer(answer, index) {
@@ -39,14 +36,8 @@ class ArtistQuestionScreen extends React.Component {
     return currentIndexAnswer === index;
   }
 
-  _onButtonPlayClick() {
-    this.setState((prevState) => ({
-      isPlaying: !prevState
-    }));
-  }
-
   render() {
-    const {question} = this.props;
+    const {question, renderPlayer} = this.props;
     const {answers, song} = question;
 
     return (
@@ -72,7 +63,7 @@ class ArtistQuestionScreen extends React.Component {
           <h2 className="game__title">Кто исполняет эту песню?</h2>
           <div className="game__track">
             <div className="track">
-              <AudioPlayer src={song.src} isPlaying={true} onButtonPlayClick={this._onButtonPlayClick}/>
+              {renderPlayer(song.src, 0)}
             </div>
           </div>
 
@@ -93,6 +84,7 @@ class ArtistQuestionScreen extends React.Component {
 
 ArtistQuestionScreen.propTypes = {
   onAnswerDone: PropTypes.func.isRequired,
+  renderPlayer: PropTypes.func.isRequired,
   question: PropTypes.shape({
     answers: PropTypes.arrayOf(PropTypes.shape({
       artist: PropTypes.string.isRequired,

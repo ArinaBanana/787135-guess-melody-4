@@ -34,7 +34,7 @@ it(`When user answer genre question form not sent`, () => {
   const {question} = mock;
   const onAnswerDone = jest.fn();
 
-  const genreQuestion = shallow(<GenreQuestionScreen question={question} onAnswerDone={onAnswerDone} />);
+  const genreQuestion = shallow(<GenreQuestionScreen question={question} onAnswerDone={onAnswerDone} renderPlayer={() => {}} />);
 
   const form = genreQuestion.find(`form`);
   const formSendPrevention = jest.fn();
@@ -49,7 +49,7 @@ it(`When user answer genre question form not sent`, () => {
 it(`User answer passed callback is consistent with "userAnswer" prop`, () => {
   const {question} = mock;
   const onAnswerDone = jest.fn();
-  const genreQuestion = shallow(<GenreQuestionScreen question={question} onAnswerDone={onAnswerDone} />);
+  const genreQuestion = shallow(<GenreQuestionScreen question={question} onAnswerDone={onAnswerDone} renderPlayer={() => {}} />);
 
   const instance = genreQuestion.instance();
   expect(instance.state.answers).toEqual([false, false, false, false]);

@@ -14,7 +14,8 @@ it(`Should render Genre Answer`, () => {
     index={0}
     userAnswer={userAnswers[1]}
     audioUrl={answer.src}
-    onChangeAnswer={() => {}} />, {
+    onChangeAnswer={() => {}}
+    renderPlayer={() => {}} />, {
     createNodeMock: () => {
       return {};
     }

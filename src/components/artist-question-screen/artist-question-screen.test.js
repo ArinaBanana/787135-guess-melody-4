@@ -23,7 +23,7 @@ const questions = [
 ];
 
 it(`Should ArtistQuestionScree render correctly`, () => {
-  const tree = renderer.create(<ArtistQuestionScreen question={questions[0]} onAnswerDone={() =>{}} />, {
+  const tree = renderer.create(<ArtistQuestionScreen question={questions[0]} onAnswerDone={() =>{}} renderPlayer={() => {}} />, {
     createNodeMock: () => {
       return {};
     }

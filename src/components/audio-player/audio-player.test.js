@@ -11,7 +11,7 @@ const mock = {
 it(`Should render AudioPlayer`, () => {
   const {song} = mock;
 
-  const tree = renderer.create(<AudioPlayer src={song.src} isPlaying={false} />, {
+  const tree = renderer.create(<AudioPlayer src={song.src} isPlaying={false} onButtonPlayClick={() => {}} />, {
     createNodeMock: () => {
       return {};
     }

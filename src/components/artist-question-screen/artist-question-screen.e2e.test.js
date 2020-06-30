@@ -36,7 +36,7 @@ describe(`Test ArtistQuestionScreen component`, () => {
   const onAnswerDone = jest.fn();
 
   it(`Click on user answer should pass to the callback data-object from which this answer was created`, () => {
-    const artistQuestion = shallow(<ArtistQuestionScreen question={question} onAnswerDone={onAnswerDone}/>);
+    const artistQuestion = shallow(<ArtistQuestionScreen question={question} onAnswerDone={onAnswerDone} renderPlayer={() => {}}/>);
     const instance = artistQuestion.instance();
 
     expect(instance.state.currentIndexAnswer).toBe(-1);
@@ -46,7 +46,7 @@ describe(`Test ArtistQuestionScreen component`, () => {
 
   describe(`Test isСhecked method`, () => {
     it(`is checked = true`, () => {
-      const artistQuestion = shallow(<ArtistQuestionScreen question={question} onAnswerDone={onAnswerDone}/>);
+      const artistQuestion = shallow(<ArtistQuestionScreen question={question} onAnswerDone={onAnswerDone} renderPlayer={() => {}}/>);
       const instance = artistQuestion.instance();
 
       expect(instance.state.currentIndexAnswer).toBe(-1);
@@ -57,7 +57,7 @@ describe(`Test ArtistQuestionScreen component`, () => {
     });
 
     it(`is checked = false`, () => {
-      const artistQuestion = shallow(<ArtistQuestionScreen question={question} onAnswerDone={onAnswerDone}/>);
+      const artistQuestion = shallow(<ArtistQuestionScreen question={question} onAnswerDone={onAnswerDone} renderPlayer={() => {}}/>);
       const instance = artistQuestion.instance();
 
       expect(instance.state.currentIndexAnswer).toBe(-1);

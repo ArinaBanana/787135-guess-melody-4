@@ -19,7 +19,8 @@ it(`User answer passed callback is consistent with "userAnswer" prop`, () => {
     index={0}
     onChangeAnswer={onChangeAnswer}
     audioUrl={answer.src}
-    userAnswer={userAnswers[0]}/>);
+    userAnswer={userAnswers[0]}
+    renderPlayer={() => {}} />);
 
   const input = genreAnswer.find(`input`);
 

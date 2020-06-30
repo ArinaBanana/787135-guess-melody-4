@@ -2,10 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
 import GenreAnswer from "../genre-answer/genre-answer.jsx";
-import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
 import {GameType} from "../../const";
-
-const GenreAnswerWrapped = withAudioPlayer(GenreAnswer);
 
 class GenreQuestionScreen extends PureComponent {
   constructor(props) {
@@ -38,7 +35,7 @@ class GenreQuestionScreen extends PureComponent {
   }
 
   render() {
-    const {question} = this.props;
+    const {question, renderPlayer} = this.props;
     const {answers, genre} = question;
     const {answers: userAnswers} = this.state;
 
@@ -76,12 +73,13 @@ class GenreQuestionScreen extends PureComponent {
             onSubmit={this._handleSubmitForm}
           >
             {
-              answers.map((answer, i) => <GenreAnswerWrapped
+              answers.map((answer, i) => <GenreAnswer
                 key={`${i}-${answer.src}`}
                 audioUrl={answer.src}
                 userAnswer={userAnswers[i]}
                 index={i}
                 onChangeAnswer={this._updateAnswers}
+                renderPlayer={renderPlayer}
               />)
             }
 
@@ -95,6 +93,7 @@ class GenreQuestionScreen extends PureComponent {
 
 GenreQuestionScreen.propTypes = {
   onAnswerDone: PropTypes.func.isRequired,
+  renderPlayer: PropTypes.func.isRequired,
   question: PropTypes.shape({
     answers: PropTypes.arrayOf(PropTypes.shape({
       src: PropTypes.string.isRequired,

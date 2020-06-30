@@ -9,10 +9,11 @@ import {GameType} from "../../const";
 import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
 
 const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
+const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);
 
 const SCREENS = {
   [GameType.ARTIST]: ArtistQuestionScreenWrapped,
-  [GameType.GENRE]: GenreQuestionScreen
+  [GameType.GENRE]: GenreQuestionScreenWrapped
 };
 
 class App extends PureComponent {
@@ -40,7 +41,7 @@ class App extends PureComponent {
             <ArtistQuestionScreenWrapped question={questions[1]} onAnswerDone={() => {}} />
           </Route>
           <Route exact path="/dev-genre">
-            <GenreQuestionScreen question={questions[0]} onAnswerDone={() => {}} />
+            <GenreQuestionScreenWrapped question={questions[0]} onAnswerDone={() => {}} />
           </Route>
         </Switch>
       </BrowserRouter>

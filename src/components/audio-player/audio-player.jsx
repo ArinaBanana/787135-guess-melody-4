@@ -8,7 +8,7 @@ class AudioPlayer extends PureComponent {
     this.state = {
       progress: 0,
       isLoading: true,
-      isPlaying: props.isPlaying
+      isPlaying: props.isPlaying,
     };
 
     this._audioRef = createRef();
@@ -17,13 +17,18 @@ class AudioPlayer extends PureComponent {
   }
 
   _handleButtonPlayClick() {
-    this.setState({isPlaying: !this.state.isPlaying});
+    const {onButtonPlayClick} = this.props;
+
+    this.setState((prevState) => ({
+      isPlaying: !prevState.isPlaying
+    }));
+
+    onButtonPlayClick();
   }
 
   componentDidMount() {
     const {src} = this.props;
     const audio = this._audioRef.current;
-
     audio.src = src;
 
     audio.oncanplaythrough = () => {
@@ -32,11 +37,9 @@ class AudioPlayer extends PureComponent {
       });
     };
 
-    audio.onplay = () => {
-      this.setState({
-        isPlaying: true
-      });
-    };
+    audio.onplay = () => this.setState({
+      isPlaying: true,
+    });
 
     audio.onpause = () => this.setState({
       isPlaying: false,
@@ -58,9 +61,10 @@ class AudioPlayer extends PureComponent {
   }
 
   componentDidUpdate() {
+    const {isPlaying} = this.state;
     const audio = this._audioRef.current;
 
-    if (this.state.isPlaying) {
+    if (isPlaying) {
       audio.play();
     } else {
       audio.pause();
@@ -89,6 +93,7 @@ class AudioPlayer extends PureComponent {
 AudioPlayer.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   src: PropTypes.string.isRequired,
+  onButtonPlayClick: PropTypes.func.isRequired,
 };
 
 export default AudioPlayer;

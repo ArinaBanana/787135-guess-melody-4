@@ -8,11 +8,11 @@ class GenreAnswer extends PureComponent {
   }
 
   render() {
-    const {audioUrl, index, userAnswer, onChangeAnswer} = this.props;
+    const {audioUrl, index, userAnswer, onChangeAnswer, onButtonPlayClick, activePlayer} = this.props;
 
     return (
       <div className="track">
-        <AudioPlayer isPlaying={index === 0} src={audioUrl}/>
+        <AudioPlayer isPlaying={index === activePlayer} src={audioUrl} onButtonPlayClick={onButtonPlayClick}/>
         <div className="game__answer">
           <input className="game__input visually-hidden"
             type="checkbox"
@@ -35,7 +35,9 @@ class GenreAnswer extends PureComponent {
 
 GenreAnswer.propTypes = {
   onChangeAnswer: PropTypes.func.isRequired,
+  onButtonPlayClick: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
+  activePlayer: PropTypes.number.isRequired,
   userAnswer: PropTypes.bool.isRequired,
   audioUrl: PropTypes.string.isRequired
 };

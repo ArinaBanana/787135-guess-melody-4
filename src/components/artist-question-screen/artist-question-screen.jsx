@@ -16,10 +16,12 @@ class ArtistQuestionScreen extends React.Component {
 
     this.state = {
       currentIndexAnswer: -1,
+      isPlaying: true
     };
 
     this._updateAnswer = this._updateAnswer.bind(this);
     this._isChecked = this._isChecked.bind(this);
+    this._onButtonPlayClick = this._onButtonPlayClick.bind(this);
   }
 
   _updateAnswer(answer, index) {
@@ -35,6 +37,12 @@ class ArtistQuestionScreen extends React.Component {
   _isChecked(index) {
     const {currentIndexAnswer} = this.state;
     return currentIndexAnswer === index;
+  }
+
+  _onButtonPlayClick() {
+    this.setState((prevState) => ({
+      isPlaying: !prevState
+    }));
   }
 
   render() {
@@ -64,7 +72,7 @@ class ArtistQuestionScreen extends React.Component {
           <h2 className="game__title">Кто исполняет эту песню?</h2>
           <div className="game__track">
             <div className="track">
-              <AudioPlayer src={song.src} isPlaying={true}/>
+              <AudioPlayer src={song.src} isPlaying={true} onButtonPlayClick={this._onButtonPlayClick}/>
             </div>
           </div>
 

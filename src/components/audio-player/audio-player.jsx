@@ -8,7 +8,6 @@ class AudioPlayer extends PureComponent {
     this.state = {
       progress: 0,
       isLoading: true,
-      isPlaying: props.isPlaying,
     };
 
     this._audioRef = createRef();
@@ -18,32 +17,23 @@ class AudioPlayer extends PureComponent {
 
   _handleButtonPlayClick() {
     const {onButtonPlayClick} = this.props;
-
-    this.setState((prevState) => ({
-      isPlaying: !prevState.isPlaying
-    }));
-
     onButtonPlayClick();
   }
 
   componentDidMount() {
-    const {src} = this.props;
+    const {src, isPlaying} = this.props;
     const audio = this._audioRef.current;
     audio.src = src;
+
+    if (isPlaying) {
+      audio.play();
+    }
 
     audio.oncanplaythrough = () => {
       this.setState({
         isLoading: false
       });
     };
-
-    audio.onplay = () => this.setState({
-      isPlaying: true,
-    });
-
-    audio.onpause = () => this.setState({
-      isPlaying: false,
-    });
 
     audio.ontimeupdate = () => this.setState({
       progress: audio.currentTime
@@ -60,19 +50,22 @@ class AudioPlayer extends PureComponent {
     audio.src = ``;
   }
 
-  componentDidUpdate() {
-    const {isPlaying} = this.state;
+  componentDidUpdate(prevProps) {
     const audio = this._audioRef.current;
+    const {isPlaying} = this.props;
 
-    if (isPlaying) {
-      audio.play();
-    } else {
+    if (prevProps.isPlaying && !isPlaying) {
       audio.pause();
+    }
+
+    if (!prevProps.isPlaying && isPlaying) {
+      audio.play();
     }
   }
 
   render() {
-    const {isLoading, isPlaying} = this.state;
+    const {isLoading} = this.state;
+    const {isPlaying} = this.props;
 
     return (
       <Fragment>

@@ -37,7 +37,7 @@ class ArtistQuestionScreen extends React.Component {
   }
 
   render() {
-    const {question} = this.props;
+    const {question, renderPlayer} = this.props;
     const {answers, song} = question;
 
     return (
@@ -63,10 +63,7 @@ class ArtistQuestionScreen extends React.Component {
           <h2 className="game__title">Кто исполняет эту песню?</h2>
           <div className="game__track">
             <div className="track">
-              <button className="track__button track__button--play" type="button" />
-              <div className="track__status">
-                <audio src={song.src} />
-              </div>
+              {renderPlayer(song.src, 0)}
             </div>
           </div>
 
@@ -87,6 +84,7 @@ class ArtistQuestionScreen extends React.Component {
 
 ArtistQuestionScreen.propTypes = {
   onAnswerDone: PropTypes.func.isRequired,
+  renderPlayer: PropTypes.func.isRequired,
   question: PropTypes.shape({
     answers: PropTypes.arrayOf(PropTypes.shape({
       artist: PropTypes.string.isRequired,

@@ -23,6 +23,10 @@ const questions = [
 ];
 
 it(`Should ArtistQuestionScree render correctly`, () => {
-  const tree = renderer.create(<ArtistQuestionScreen question={questions[0]} onAnswerDone={() =>{}} />).toJSON();
+  const tree = renderer.create(<ArtistQuestionScreen question={questions[0]} onAnswerDone={() =>{}} renderPlayer={() => {}} />, {
+    createNodeMock: () => {
+      return {};
+    }
+  }).toJSON();
   expect(tree).toMatchSnapshot();
 });

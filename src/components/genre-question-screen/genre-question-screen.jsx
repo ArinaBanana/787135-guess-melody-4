@@ -35,7 +35,7 @@ class GenreQuestionScreen extends PureComponent {
   }
 
   render() {
-    const {question} = this.props;
+    const {question, renderPlayer} = this.props;
     const {answers, genre} = question;
     const {answers: userAnswers} = this.state;
 
@@ -79,6 +79,7 @@ class GenreQuestionScreen extends PureComponent {
                 userAnswer={userAnswers[i]}
                 index={i}
                 onChangeAnswer={this._updateAnswers}
+                renderPlayer={renderPlayer}
               />)
             }
 
@@ -92,6 +93,7 @@ class GenreQuestionScreen extends PureComponent {
 
 GenreQuestionScreen.propTypes = {
   onAnswerDone: PropTypes.func.isRequired,
+  renderPlayer: PropTypes.func.isRequired,
   question: PropTypes.shape({
     answers: PropTypes.arrayOf(PropTypes.shape({
       src: PropTypes.string.isRequired,

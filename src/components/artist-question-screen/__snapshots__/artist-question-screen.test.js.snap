@@ -68,19 +68,7 @@ exports[`Should ArtistQuestionScree render correctly 1`] = `
     >
       <div
         className="track"
-      >
-        <button
-          className="track__button track__button--play"
-          type="button"
-        />
-        <div
-          className="track__status"
-        >
-          <audio
-            src="path"
-          />
-        </div>
-      </div>
+      />
     </div>
     <form
       className="game__artist"

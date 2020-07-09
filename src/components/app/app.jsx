@@ -1,6 +1,8 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
-import {Switch, BrowserRouter, Route} from 'react-router-dom';
+import React, {PureComponent} from "react";
+import PropTypes from "prop-types";
+import {Switch, BrowserRouter, Route} from "react-router-dom";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer";
 
 import WelcomeScreen from "../welcome-screen/welcome-screen.jsx";
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen.jsx";
@@ -19,10 +21,6 @@ const SCREENS = {
 class App extends PureComponent {
   constructor(props) {
     super(props);
-
-    this.state = {
-      step: -1,
-    };
 
     this._goNextQuestion = this._goNextQuestion.bind(this);
     this._startTest = this._startTest.bind(this);
@@ -49,8 +47,7 @@ class App extends PureComponent {
   }
 
   _renderGameScreen() {
-    const {errorsCount, questions} = this.props;
-    const {step} = this.state;
+    const {errorsCount, questions, step} = this.props;
     const question = questions[step];
 
     const isDefaultStep = step === -1;
@@ -78,28 +75,41 @@ class App extends PureComponent {
   }
 
   _goNextQuestion() {
-    const {questions} = this.props;
-    const {step} = this.state;
+    const {questions, step, onUserAnswer} = this.props;
 
     const isLastStep = step === questions.length - 1;
 
     if (!isLastStep) {
-      this.setState((prevState) => ({
-        step: prevState.step + 1,
-      }));
+      onUserAnswer();
     }
   }
 
   _startTest() {
-    this.setState({
-      step: 0
-    });
+    const {onWelcomeButtonClick} = this.props;
+    onWelcomeButtonClick();
   }
 }
 
+const mapStateToProps = (state) => ({
+  step: state.step,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onWelcomeButtonClick() {
+    dispatch(ActionCreator.incrementStep());
+  },
+  onUserAnswer() {
+    dispatch(ActionCreator.incrementStep());
+  },
+});
+
 App.propTypes = {
   errorsCount: PropTypes.number.isRequired,
-  questions: PropTypes.array.isRequired
+  questions: PropTypes.array.isRequired,
+  onUserAnswer: PropTypes.func.isRequired,
+  onWelcomeButtonClick: PropTypes.func.isRequired,
+  step: PropTypes.number.isRequired,
 };
 
-export default App;
+// export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

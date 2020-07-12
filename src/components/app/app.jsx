@@ -111,5 +111,5 @@ App.propTypes = {
   step: PropTypes.number.isRequired,
 };
 
-// export {App};
+export {App};
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -13,21 +13,25 @@ class ArtistQuestionScreen extends React.Component {
 
     this._updateAnswer = this._updateAnswer.bind(this);
     this._isChecked = this._isChecked.bind(this);
+    this._handleSubmitForm = this._handleSubmitForm.bind(this);
   }
 
   _updateAnswer(answer, index) {
-    const {onAnswerDone, question} = this.props;
+    this._answer = answer;
 
     this.setState({
       currentIndexAnswer: index
     });
-
-    onAnswerDone(question, answer);
   }
 
   _isChecked(index) {
     const {currentIndexAnswer} = this.state;
     return currentIndexAnswer === index;
+  }
+
+  _handleSubmitForm() {
+    const {onAnswerDone, question} = this.props;
+    onAnswerDone(question, this._answer);
   }
 
   render() {
@@ -43,7 +47,13 @@ class ArtistQuestionScreen extends React.Component {
           </div>
         </div>
 
-        <form className="game__artist">
+        <form
+          action="#"
+          className="game__artist"
+          onSubmit={(evt) => {
+            evt.preventDefault();
+            this._handleSubmitForm();
+          }}>
           {
             answers.map((answer, i) => {
               const isChecked = this._isChecked(i);
@@ -51,6 +61,7 @@ class ArtistQuestionScreen extends React.Component {
               return <ArtistAnswer key={answer.artist} answer={answer} index={i} onChangeAnswer={this._updateAnswer} isChecked={isChecked} />;
             })
           }
+          <button type="submit" className="visually-hidden" />
         </form>
       </section>
     );

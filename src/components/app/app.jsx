@@ -86,13 +86,15 @@ class App extends PureComponent {
   }
 
   _goNextQuestion(question, answer) {
-    const {questions, step, onUserAnswer} = this.props;
+    const {onUserAnswer} = this.props;
 
-    const isLastStep = step === questions.length - 1;
+    // const isLastStep = step === questions.length - 1;
 
-    if (!isLastStep) {
-      onUserAnswer(question, answer);
-    }
+    // if (!isLastStep) {
+    //   onUserAnswer(question, answer);
+    // }
+
+    onUserAnswer(question, answer);
   }
 
   _startTest() {

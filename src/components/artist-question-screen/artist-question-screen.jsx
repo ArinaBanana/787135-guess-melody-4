@@ -22,13 +22,13 @@ class ArtistQuestionScreen extends React.Component {
   }
 
   _updateAnswer(answer, index) {
-    const {onAnswerDone} = this.props;
+    const {onAnswerDone, question} = this.props;
 
     this.setState({
       currentIndexAnswer: index
     });
 
-    onAnswerDone(answer, index);
+    onAnswerDone(question, answer);
   }
 
   _isChecked(index) {

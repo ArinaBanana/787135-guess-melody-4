@@ -85,13 +85,13 @@ class App extends PureComponent {
     return null;
   }
 
-  _goNextQuestion() {
+  _goNextQuestion(question, answer) {
     const {questions, step, onUserAnswer} = this.props;
 
     const isLastStep = step === questions.length - 1;
 
     if (!isLastStep) {
-      onUserAnswer();
+      onUserAnswer(question, answer);
     }
   }
 
@@ -109,8 +109,9 @@ const mapDispatchToProps = (dispatch) => ({
   onWelcomeButtonClick() {
     dispatch(ActionCreator.incrementStep());
   },
-  onUserAnswer() {
+  onUserAnswer(question, answer) {
     dispatch(ActionCreator.incrementStep());
+    dispatch(ActionCreator.incrementMistake(question, answer));
   },
 });
 

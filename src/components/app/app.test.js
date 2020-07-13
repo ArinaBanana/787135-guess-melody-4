@@ -1,6 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React from "react";
+import renderer from "react-test-renderer";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+
 import {App} from "./app.jsx";
+
+const mockStore = configureStore([]);
 
 const questions = [
   {
@@ -41,13 +46,21 @@ const questions = [
 
 describe(`Render App`, () => {
   it(`Render Welcome Screen`, () => {
-    const tree = renderer.create(<App
-      errorsCount={3}
-      questions={questions}
-      onWelcomeButtonClick={() => {}}
-      onUserAnswer={() => {}}
-      step={-1}
-    />).toJSON();
+    const store = mockStore({
+      mistakes: 0,
+    });
+
+    const tree = renderer.create(
+        <Provider store={store}>
+          <App
+            errorsCount={3}
+            questions={questions}
+            onWelcomeButtonClick={() => {}}
+            onUserAnswer={() => {}}
+            step={-1}
+          />
+        </Provider>
+    ).toJSON();
 
     jest
       .spyOn(window.HTMLMediaElement.prototype, `play`)
@@ -57,17 +70,24 @@ describe(`Render App`, () => {
   });
 
   it(`Render Genre Question Screen`, () => {
-    const tree = renderer.create(<App
-      errorsCount={3}
-      questions={questions}
-      onWelcomeButtonClick={() => {}}
-      onUserAnswer={() => {}}
-      step={0}
-    />, {
-      createNodeMock: () => {
-        return document.createElement(`audio`);
-      }
-    }).toJSON();
+    const store = mockStore({
+      mistakes: 3,
+    });
+
+    const tree = renderer.create(
+        <Provider store={store}>
+          <App
+            errorsCount={3}
+            questions={questions}
+            onWelcomeButtonClick={() => {}}
+            onUserAnswer={() => {}}
+            step={0}
+          />
+        </Provider>, {
+          createNodeMock: () => {
+            return document.createElement(`audio`);
+          }
+        }).toJSON();
 
     jest
       .spyOn(window.HTMLMediaElement.prototype, `play`)
@@ -77,17 +97,24 @@ describe(`Render App`, () => {
   });
 
   it(`Render Artist Question Screen`, () => {
-    const tree = renderer.create(<App
-      errorsCount={3}
-      questions={questions}
-      onWelcomeButtonClick={() => {}}
-      onUserAnswer={() => {}}
-      step={1}
-    />, {
-      createNodeMock: () => {
-        return document.createElement(`audio`);
-      }
-    }).toJSON();
+    const store = mockStore({
+      mistakes: 3,
+    });
+
+    const tree = renderer.create(
+        <Provider store={store}>
+          <App
+            errorsCount={3}
+            questions={questions}
+            onWelcomeButtonClick={() => {}}
+            onUserAnswer={() => {}}
+            step={1}
+          />
+        </Provider>, {
+          createNodeMock: () => {
+            return document.createElement(`audio`);
+          }
+        }).toJSON();
 
     jest
       .spyOn(window.HTMLMediaElement.prototype, `play`)

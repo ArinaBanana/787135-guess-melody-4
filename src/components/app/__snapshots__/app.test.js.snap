@@ -83,7 +83,9 @@ exports[`Render App Render Artist Question Screen 1`] = `
       </div>
     </div>
     <form
+      action="#"
       className="game__artist"
+      onSubmit={[Function]}
     >
       <div
         className="artist"
@@ -172,6 +174,10 @@ exports[`Render App Render Artist Question Screen 1`] = `
           Jim Beam
         </label>
       </div>
+      <button
+        className="visually-hidden"
+        type="submit"
+      />
     </form>
   </section>
 </section>

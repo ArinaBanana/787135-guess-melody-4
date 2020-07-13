@@ -17,7 +17,9 @@ exports[`Should ArtistQuestionScree render correctly 1`] = `
     />
   </div>
   <form
+    action="#"
     className="game__artist"
+    onSubmit={[Function]}
   >
     <div
       className="artist"
@@ -106,6 +108,10 @@ exports[`Should ArtistQuestionScree render correctly 1`] = `
         Jim Beam
       </label>
     </div>
+    <button
+      className="visually-hidden"
+      type="submit"
+    />
   </form>
 </section>
 `;

@@ -1,5 +1,5 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import React, {PureComponent} from "react";
+import PropTypes from "prop-types";
 
 import GenreAnswer from "../genre-answer/genre-answer.jsx";
 import {GameType} from "../../const";
@@ -39,53 +39,27 @@ class GenreQuestionScreen extends PureComponent {
     const {answers, genre} = question;
     const {answers: userAnswers} = this.state;
 
-    const styleForTimerLine = {
-      "filter": `url(#blur)`,
-      "transform": `rotate(-90deg) scaleY(-1)`,
-      "transformOrigin": `center`
-    };
-
     return (
-      <section className="game game--genre">
-        <header className="game__header">
-          <a className="game__back" href="#">
-            <span className="visually-hidden">Сыграть ещё раз</span>
-            <img className="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию"/>
-          </a>
+      <section className="game__screen">
+        <h2 className="game__title">Выберите {genre} треки</h2>
+        <form
+          action="#"
+          className="game__tracks"
+          onSubmit={this._handleSubmitForm}
+        >
+          {
+            answers.map((answer, i) => <GenreAnswer
+              key={`${i}-${answer.src}`}
+              audioUrl={answer.src}
+              userAnswer={userAnswers[i]}
+              index={i}
+              onChangeAnswer={this._updateAnswers}
+              renderPlayer={renderPlayer}
+            />)
+          }
 
-          <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
-            <circle className="timer__line" cx="390" cy="390" r="370"
-              style={styleForTimerLine}/>
-          </svg>
-
-          <div className="game__mistakes">
-            <div className="wrong" />
-            <div className="wrong" />
-            <div className="wrong" />
-          </div>
-        </header>
-
-        <section className="game__screen">
-          <h2 className="game__title">Выберите {genre} треки</h2>
-          <form
-            action="#"
-            className="game__tracks"
-            onSubmit={this._handleSubmitForm}
-          >
-            {
-              answers.map((answer, i) => <GenreAnswer
-                key={`${i}-${answer.src}`}
-                audioUrl={answer.src}
-                userAnswer={userAnswers[i]}
-                index={i}
-                onChangeAnswer={this._updateAnswers}
-                renderPlayer={renderPlayer}
-              />)
-            }
-
-            <button className="game__submit button" type="submit">Ответить</button>
-          </form>
-        </section>
+          <button className="game__submit button" type="submit">Ответить</button>
+        </form>
       </section>
     );
   }

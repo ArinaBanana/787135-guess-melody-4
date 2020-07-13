@@ -2,13 +2,16 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {Switch, BrowserRouter, Route} from "react-router-dom";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer";
 
 import WelcomeScreen from "../welcome-screen/welcome-screen.jsx";
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen.jsx";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen.jsx";
-import {GameType} from "../../const";
+import GameScreen from "../game-screen/game-screen.jsx";
+
 import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
+
+import {GameType} from "../../const";
+import {ActionCreator} from "../../reducer";
 
 const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
 const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);
@@ -36,10 +39,14 @@ class App extends PureComponent {
             {this._renderGameScreen()}
           </Route>
           <Route exact path="/dev-artist">
-            <ArtistQuestionScreenWrapped question={questions[1]} onAnswerDone={() => {}} />
+            <GameScreen type={GameType.ARTIST}>
+              <ArtistQuestionScreenWrapped question={questions[1]} onAnswerDone={() => {}} />
+            </GameScreen>
           </Route>
           <Route exact path="/dev-genre">
-            <GenreQuestionScreenWrapped question={questions[0]} onAnswerDone={() => {}} />
+            <GameScreen type={GameType.GENRE}>
+              <GenreQuestionScreenWrapped question={questions[0]} onAnswerDone={() => {}} />
+            </GameScreen>
           </Route>
         </Switch>
       </BrowserRouter>
@@ -68,7 +75,11 @@ class App extends PureComponent {
         return null;
       }
 
-      return <Component question={question} onAnswerDone={this._goNextQuestion} />;
+      return (
+        <GameScreen type={question.type}>
+          <Component question={question} onAnswerDone={this._goNextQuestion} />
+        </GameScreen>
+      );
     }
 
     return null;

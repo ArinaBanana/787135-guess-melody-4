@@ -3,12 +3,6 @@ import PropTypes from "prop-types";
 import {GameType} from "../../const";
 import ArtistAnswer from "../artist-answer/artist-answer.jsx";
 
-const styleForTimerLine = {
-  "filter": `url(#blur)`,
-  "transform": `rotate(-90deg) scaleY(-1)`,
-  "transformOrigin": `center`
-};
-
 class ArtistQuestionScreen extends React.Component {
   constructor(props) {
     super(props);
